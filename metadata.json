@@ -1,0 +1,6 @@
+{
+  "name": "AI Engineer Portfolio",
+  "description": "A high-end, interactive personal brand and portfolio web application for an AI Engineer featuring interactive AI playgrounds, project gallery, deep-dive tech blog, and a professional inquiries tracker.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
