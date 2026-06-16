@@ -45,10 +45,6 @@ export default function Projects({}: ProjectsProps) {
         {/* Module Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
           <div>
-            <div className="inline-flex items-center space-x-2 bg-violet-500/10 border border-violet-500/20 px-2.5 py-1 rounded text-[11px] font-mono text-violet-400 mb-3">
-              <Layers className="w-3.5 h-3.5 animate-pulse text-violet-400" />
-              <span>Project Artifacts</span>
-            </div>
             <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
               Projects & Builds
             </h2>

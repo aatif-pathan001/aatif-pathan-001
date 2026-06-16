@@ -5,6 +5,7 @@ import About from './components/About';
 import AIExpertiseTree from './components/AIExpertiseTree';
 import Projects from './components/Projects';
 import Blog from './components/Blog';
+import SkillStack from './components/SkillStack';
 import Contact from './components/Contact';
 import { Terminal, Github, Cpu, Linkedin, Globe, Sparkles } from 'lucide-react';
 
@@ -13,7 +14,7 @@ export default function App() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const sectionIds = ['hero', 'about', 'expertise', 'projects', 'blog', 'contact'];
+      const sectionIds = ['hero', 'about', 'expertise', 'projects', 'blog', 'skills', 'contact'];
       let currentSection = 'hero';
 
       sectionIds.forEach((id) => {
@@ -61,6 +62,9 @@ export default function App() {
 
         {/* Technical Blog / Deep dives */}
         <Blog />
+
+        {/* Skill Stack Section */}
+        <SkillStack />
 
         {/* Contact form and admin dashboard */}
         <Contact />
