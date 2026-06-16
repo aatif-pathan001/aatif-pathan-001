@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Layers, Github, ExternalLink, Cpu, Hammer, Search, Eye } from 'lucide-react';
 import { Project } from '../types';
+import { FALLBACK_PROJECTS } from '../data/fallbackData';
 
 interface ProjectsProps {}
 
@@ -17,11 +18,15 @@ export default function Projects({}: ProjectsProps) {
         return res.json();
       })
       .then((data) => {
+        if (!Array.isArray(data) || data.length === 0) {
+          throw new Error("Empty or invalid projects list, switching to client-side fallback.");
+        }
         setProjects(data);
         setLoading(false);
       })
       .catch((err) => {
-        console.error(err);
+        console.warn("Express endpoint '/api/projects' is unreachable. Falling back to high-fidelity static portfolio data:", err);
+        setProjects(FALLBACK_PROJECTS);
         setLoading(false);
       });
   }, []);

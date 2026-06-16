@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { BookOpen, Calendar, Clock, ThumbsUp, ChevronRight, Search, FileText } from 'lucide-react';
 import { BlogPost } from '../types';
+import { FALLBACK_BLOG_POSTS } from '../data/fallbackData';
 
 export default function Blog() {
   const [posts, setPosts] = useState<BlogPost[]>([]);
@@ -16,11 +17,15 @@ export default function Blog() {
         return res.json();
       })
       .then((data) => {
+        if (!Array.isArray(data) || data.length === 0) {
+          throw new Error("Empty or invalid articles payload, redirecting to local archive cache.");
+        }
         setPosts(data);
         setLoading(false);
       })
       .catch((err) => {
-        console.error(err);
+        console.warn("Express backend endpoint '/api/blog' failed (expected on static static hosts like Vercel). Loading cached local archive:", err);
+        setPosts(FALLBACK_BLOG_POSTS);
         setLoading(false);
       });
   }, []);
