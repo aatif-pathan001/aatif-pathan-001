@@ -65,7 +65,7 @@ export default function Blog() {
               <span>Technical Deep Dives</span>
             </div>
             <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
-              The Architecture logs
+              Technical Writings
             </h2>
             <p className="mt-2 text-sm text-zinc-400 max-w-xl">
               Concrete walkthroughs, research summaries, and systems strategies written to demystify complex neural execution architectures in real production states.
@@ -121,6 +121,11 @@ export default function Blog() {
                       <Clock className="w-3 h-3 text-zinc-550" />
                       <span>{post.readTime}</span>
                     </span>
+                    {post.url && (
+                      <span className="text-zinc-400 font-bold bg-zinc-900 border border-zinc-800 px-1.5 py-0.5 rounded text-[9px]">
+                        Medium.com
+                      </span>
+                    )}
                   </div>
 
                   <h3 className="text-lg sm:text-xl font-bold font-serif text-white group-hover:text-violet-400 transition-colors">
@@ -256,11 +261,22 @@ export default function Blog() {
                     <ThumbsUp className="w-3.5 h-3.5 text-violet-400" />
                     <span>{selectedPost.likes} Loves</span>
                   </button>
+                  {selectedPost.url && (
+                    <a
+                      href={selectedPost.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="bg-violet-500/15 hover:bg-violet-500/25 border border-violet-500/30 text-violet-350 px-4 py-1.5 rounded-lg text-xs font-mono flex items-center space-x-1 inline-flex items-center transition-all cursor-pointer"
+                    >
+                      <span>Read on Medium</span>
+                      <ChevronRight className="w-3 h-3" />
+                    </a>
+                  )}
                   <button
                     onClick={() => setSelectedPost(null)}
                     className="bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 text-white px-4 py-1.5 rounded-lg text-xs font-mono font-medium cursor-pointer"
                   >
-                    Finish Reading
+                    Close
                   </button>
                 </div>
               </div>

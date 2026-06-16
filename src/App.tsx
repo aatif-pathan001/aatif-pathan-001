@@ -1,22 +1,41 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Navigation from './components/Navigation';
 import Hero from './components/Hero';
 import About from './components/About';
 import AIExpertiseTree from './components/AIExpertiseTree';
 import Projects from './components/Projects';
-import AIDemoPlayground from './components/AIDemoPlayground';
 import Blog from './components/Blog';
 import Contact from './components/Contact';
 import { Terminal, Github, Cpu, Linkedin, Globe, Sparkles } from 'lucide-react';
 
 export default function App() {
   const [activeSection, setActiveSection] = useState<string>('hero');
-  const [playgroundPreset, setPlaygroundPreset] = useState<string | null>(null);
 
-  const handleSelectPlaygroundTemplate = (demoType: string) => {
-    setPlaygroundPreset(demoType);
-    setActiveSection('playground');
-  };
+  useEffect(() => {
+    const handleScroll = () => {
+      const sectionIds = ['hero', 'about', 'expertise', 'projects', 'blog', 'contact'];
+      let currentSection = 'hero';
+
+      sectionIds.forEach((id) => {
+        const el = document.getElementById(id);
+        if (el) {
+          const rect = el.getBoundingClientRect();
+          // The last section that scrolled past our trigger threshold (200px from top) is active
+          if (rect.top <= 200) {
+            currentSection = id;
+          }
+        }
+      });
+
+      setActiveSection(currentSection);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    // Run once at start to adjust correct section
+    handleScroll();
+
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
     <div className="relative min-h-screen text-zinc-100 flex flex-col justify-between bg-zinc-950">
@@ -38,13 +57,7 @@ export default function App() {
         <AIExpertiseTree />
 
         {/* Work / Project Catalog */}
-        <Projects onSelectPlaygroundTemplate={handleSelectPlaygroundTemplate} />
-
-        {/* Dynamic Sandbox Core */}
-        <AIDemoPlayground
-          selectedTemplate={playgroundPreset}
-          onClearTemplate={() => setPlaygroundPreset(null)}
-        />
+        <Projects />
 
         {/* Technical Blog / Deep dives */}
         <Blog />
@@ -71,7 +84,7 @@ export default function App() {
           {/* Social connections */}
           <div className="flex items-center space-x-5">
             <a
-              href="https://github.com"
+              href="https://github.com/aatif-pathan001"
               target="_blank"
               rel="noreferrer"
               className="p-1.5 rounded-md hover:bg-zinc-900 text-zinc-400 hover:text-white transition-all"
@@ -80,7 +93,7 @@ export default function App() {
               <Github className="w-4 h-4" />
             </a>
             <a
-              href="https://linkedin.com"
+              href="https://www.linkedin.com/in/aatif-khan-pathan-a1674617b"
               target="_blank"
               rel="noreferrer"
               className="p-1.5 rounded-md hover:bg-zinc-900 text-zinc-400 hover:text-white transition-all"
@@ -95,12 +108,6 @@ export default function App() {
             >
               <Globe className="w-4 h-4" />
             </a>
-          </div>
-
-          {/* Core System metadata - Humble and informative, avoiding unrequested slop */}
-          <div className="text-[10px] font-mono text-zinc-500 flex items-center space-x-2">
-            <Sparkles className="w-3.5 h-3.5 text-violet-400 animate-pulse" />
-            <span>Built on Google AI Studio Platform</span>
           </div>
         </div>
       </footer>

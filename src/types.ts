@@ -23,6 +23,7 @@ export interface BlogPost {
   tags: string[];
   category: 'Research' | 'Tutorial' | 'Engineering' | 'Career';
   likes: number;
+  url?: string;
 }
 
 export interface Inquiry {

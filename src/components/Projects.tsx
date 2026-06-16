@@ -2,11 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { Layers, Github, ExternalLink, Cpu, Hammer, Search, Eye } from 'lucide-react';
 import { Project } from '../types';
 
-interface ProjectsProps {
-  onSelectPlaygroundTemplate: (templateCode: string) => void;
-}
+interface ProjectsProps {}
 
-export default function Projects({ onSelectPlaygroundTemplate }: ProjectsProps) {
+export default function Projects({}: ProjectsProps) {
   const [projects, setProjects] = useState<Project[]>([]);
   const [filter, setFilter] = useState<string>('all');
   const [loading, setLoading] = useState<boolean>(true);
@@ -28,7 +26,7 @@ export default function Projects({ onSelectPlaygroundTemplate }: ProjectsProps) 
       });
   }, []);
 
-  const categories = ['all', 'LLM Agents', 'Computer Vision', 'Mlopps / Infrastructure'];
+  const categories = ['all', ...Array.from(new Set(projects.map(p => p.category)))];
 
   const filteredProjects = filter === 'all'
     ? projects
@@ -47,7 +45,7 @@ export default function Projects({ onSelectPlaygroundTemplate }: ProjectsProps) 
               <span>Project Artifacts</span>
             </div>
             <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
-              Systems Engineering & Research
+              Projects & Builds
             </h2>
             <p className="mt-2 text-sm text-zinc-400 max-w-xl">
               Production-grade code repositories, architectural designs, and customized pipelines optimized for throughput, safety, and agent precision.
@@ -149,22 +147,9 @@ export default function Projects({ onSelectPlaygroundTemplate }: ProjectsProps) 
                     </button>
                   </div>
 
-                  {project.demoType !== 'none' ? (
-                    <button
-                      onClick={() => {
-                        onSelectPlaygroundTemplate(project.demoType);
-                        document.getElementById('playground')?.scrollIntoView({ behavior: 'smooth' });
-                      }}
-                      className="inline-flex items-center space-x-1.5 bg-violet-500/10 hover:bg-gradient-to-r hover:from-violet-600 hover:to-indigo-600 text-violet-400 hover:text-white border border-violet-500/30 hover:border-violet-500 px-3 py-1.5 rounded text-[11px] font-mono transition-all cursor-pointer"
-                    >
-                      <Cpu className="w-3 h-3" />
-                      <span>Run Demo Playground</span>
-                    </button>
-                  ) : (
-                    <span className="text-[10px] font-mono text-zinc-500 italic">
-                      Live demo offline
-                    </span>
-                  )}
+                  <span className="text-[10px] font-mono text-zinc-500 italic">
+                    Production code repository
+                  </span>
                 </div>
               </div>
             ))}
@@ -196,19 +181,11 @@ export default function Projects({ onSelectPlaygroundTemplate }: ProjectsProps) 
                   </p>
                 </div>
 
-                <div className="grid grid-cols-2 gap-4 bg-zinc-950 p-4 rounded-lg border border-zinc-800">
-                  <div>
-                    <span className="text-[10px] font-mono text-zinc-400 block">EVALUATED PERFORMANCE IMPACT</span>
-                    <span className="text-sm font-bold font-mono text-violet-400 mt-1 block">
-                      {selectedProject.highlightedMetric || "Not Profiled"}
-                    </span>
-                  </div>
-                  <div>
-                    <span className="text-[10px] font-mono text-zinc-400 block">SANDBOX DEMO LAUNCHER</span>
-                    <span className="text-xs font-mono text-zinc-300 mt-1 block">
-                      {selectedProject.demoType !== 'none' ? "Available via AI Sandbox tab" : "Static artifact repository"}
-                    </span>
-                  </div>
+                <div className="bg-zinc-950 p-4 rounded-lg border border-zinc-800">
+                  <span className="text-[10px] font-mono text-zinc-400 block">EVALUATED PERFORMANCE IMPACT</span>
+                  <span className="text-sm font-bold font-mono text-violet-400 mt-1 block">
+                    {selectedProject.highlightedMetric || "Not Profiled"}
+                  </span>
                 </div>
 
                 <div>
@@ -236,19 +213,6 @@ export default function Projects({ onSelectPlaygroundTemplate }: ProjectsProps) 
                       <Github className="w-3.5 h-3.5" />
                       <span>Code Repo</span>
                     </a>
-                  )}
-                  {selectedProject.demoType !== 'none' && (
-                    <button
-                      onClick={() => {
-                        onSelectPlaygroundTemplate(selectedProject.demoType);
-                        setSelectedProject(null);
-                        document.getElementById('playground')?.scrollIntoView({ behavior: 'smooth' });
-                      }}
-                      className="bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 text-white px-3.5 py-1.5 rounded text-xs font-mono font-medium flex items-center space-x-1.5 cursor-pointer"
-                    >
-                      <Cpu className="w-3.5 h-3.5 text-violet-200" />
-                      <span>Execute Sandbox</span>
-                    </button>
                   )}
                 </div>
               </div>

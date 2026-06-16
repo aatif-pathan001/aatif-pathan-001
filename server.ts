@@ -86,60 +86,18 @@ const inquiries: Inquiry[] = [
 // 1. Projects Endpoint
 const PROJECTS = [
   {
-    id: "proj-agent-core",
-    title: "AetherAgents",
-    description: "Multi-agent autonomous framework featuring hierarchical command, tool invocation caching, and conversational memory compressed using incremental embeddings.",
-    longDescription: "AetherAgents is a framework designed to build, deploy, and inspect autonomous multi-agent systems. It optimizes system budget and prompt usage by compression, caching, and running local models for routing before querying central models. It handles long-term planning, context synthesis, and self-correction workflows natively.",
-    tags: ["TypeScript", "LangGraph", "Gemini API", "Vector Embeddings", "NodeJS"],
+    id: "proj-youtube-triage",
+    title: "YouTube Video Triage",
+    description: "Specialized productivity tool designed for professional self-learners to determine if a long-form video (1–4 hours) is worth their time before they commit to watching it.",
+    longDescription: "YouTube Video Triage is a specialized productivity tool designed for professional self-learners to determine if a long-form video (1–4 hours) is worth their time before they commit to watching it.\n\nRather than relying on unreliable indicators like 'likes' or general descriptions, the application provides a 'one-shot' verification of whether a specific topic is covered.\n\n### Core Purpose:\nThe app solves the 'lost in explanation' problem. It targets professionals (specifically ages 22–27) who spend 5–6 hours weekly on technical tutorials but often find themselves skimming at 2x speed, only to realize halfway through that a video doesn't actually answer their specific question.\n\n### Key Features:\n• Topic Verification: Paste a URL and ask a specific question; the app confirms if the answer exists within the video.\n• Exact Timestamps: If the topic is present, it provides clickable timestamps to jump directly to the relevant section.\n• Negative Scenario Handling: If the topic isn't found, the app provides a 'Skip' button to quickly move on to a different search result.\n• Interactive Breakdown: Users receive a brief breakdown and teaching summary within 60 seconds to facilitate immediate decision-making.\n\n### Strategic Positioning:\n• Dedicated: Focused solely on the 'triage' phase of learning.\n• One-Shot: Delivers exact information without requiring long chat threads.\n• Frictionless: Designed to work without mandatory logins or browser extensions in its V1.\n\n### Setup:\n1. Clone the repository:\n   git clone https://github.com/aatif-pathan001/youtube_triage.git\n   cd youtube_triage\n2. Create environment file:\n   cp .env.example .env\n   # Add your GOOGLE_API_KEY to .env\n3. Install dependencies:\n   pip install -e \".[dev]\"\n4. Verify installation:\n   pytest tests/unit/ -v\n   # Expected: 2 passed\n\n### Usage:\nRun the application with a YouTube URL and question:\n   python main.py\n\nExpected output: a printed answer based on the video content.",
+    tags: ["Python", "Gemini API", "Pytest", "Triage Pipeline", "YouTube API"],
     category: "LLM Agents",
-    githubUrl: "https://github.com/example/aether-agents",
-    liveUrl: "#",
-    demoType: "text-agent",
-    icon: "Cpu",
-    featured: true,
-    highlightedMetric: "Memory Compression reduces token usage by 54%."
-  },
-  {
-    id: "proj-llm-compiler",
-    title: "PromptCompiler Studio",
-    description: "An optimization IDE that profiles system instructions, extracts repetitive boilerplates, and dynamically compiles context tokens using structural ASTs.",
-    longDescription: "PromptCompiler acts as a compiler for LLM prompts. By leveraging ASTs, it analyses prompts for redundancies, generates optimal response schemas automatically, and evaluates token efficiency curves over iterative cycles. It reduces cost and response latency.",
-    tags: ["React", "Express", "D3.js", "AST Parser", "Token Counter"],
-    category: "LLM Agents",
-    githubUrl: "https://github.com/example/promptcompile-studio",
-    liveUrl: "#",
-    demoType: "prompt-compiler",
-    icon: "Wrench",
-    featured: true,
-    highlightedMetric: "Improves execution latency by 35% on average."
-  },
-  {
-    id: "proj-vision-ocr",
-    title: "IrisVisual Pipeline",
-    description: "A server-authoritative visual pipeline running continuous image inference to perform structured receipt digitization and custom document graph mapping.",
-    longDescription: "A pipeline optimized for processing complicated forms, receipts, and structural engineering diagrams. By fusing Vision LLMs with classic OCR bounding boxes, IrisVisual forms complete hierarchy graphs of documents, translating image scans directly into clean JSON payloads.",
-    tags: ["Python", "PyTorch", "Vision LLM", "Docker", "Tailwind"],
-    category: "Computer Vision",
-    githubUrl: "https://github.com/example/iris-visual-ocr",
+    githubUrl: "https://github.com/aatif-pathan001/youtube_triage",
     liveUrl: "#",
     demoType: "none",
-    icon: "Eye",
-    featured: false,
-    highlightedMetric: "Accuracy level at 99.4% for structured tables."
-  },
-  {
-    id: "proj-ml-edge",
-    title: "ChronosTelemetry",
-    description: "High-throughput monitoring platform designed to inspect container microservices, audit embedding vectors, and detect real-time semantic drift in models.",
-    longDescription: "ChronosTelemetry bridges model deployment with classic monitoring. It tracks raw embeddings from active API routes, projects them on low-dimensional spaces, and triggers warnings whenever incoming user inputs signal severe domain or concept drift.",
-    tags: ["Go", "gRPC", "Prometheus", "Recharts", "Cosine-Similarity"],
-    category: "Mlopps / Infrastructure",
-    githubUrl: "https://github.com/example/chronos-telemetry",
-    liveUrl: "#",
-    demoType: "none",
-    icon: "Activity",
-    featured: false,
-    highlightedMetric: "Detects data drift in under 1.2 seconds."
+    icon: "Video",
+    featured: true,
+    highlightedMetric: "One-shot verification results in under 60s."
   }
 ];
 
@@ -147,7 +105,10 @@ app.get("/api/projects", (req, res) => {
   res.json(PROJECTS);
 });
 
-// 2. Blog Posts Endpoint
+// 2. Blog Posts Endpoint & Medium Integration
+import Parser from "rss-parser";
+const parser = new Parser();
+
 const BLOG_POSTS = [
   {
     id: "post-low-latency",
@@ -200,7 +161,8 @@ Ensure you stream tokens incrementally back to the browser rather than waiting f
     readTime: "6 min read",
     tags: ["LLM Performance", "Caching", "Architecture", "System Engineering"],
     category: "Engineering",
-    likes: 42
+    likes: 42,
+    url: "https://medium.com/@aatifkhanjodhpur"
   },
   {
     id: "post-system-instruct",
@@ -238,22 +200,135 @@ By passing a strict \`responseSchema\` through the SDK structure, we completely 
     readTime: "8 min read",
     tags: ["Prompt Engineering", "JSON Enforcement", "Security"],
     category: "Tutorial",
-    likes: 58
+    likes: 58,
+    url: "https://medium.com/@aatifkhanjodhpur"
   }
 ];
 
-app.get("/api/blog", (req, res) => {
-  res.json(BLOG_POSTS);
+let cachedBlogPosts: any[] = [];
+let lastFetchedTime = 0;
+const CACHE_TTL = 10 * 60 * 1000; // 10 minutes cache
+
+async function getMediumPosts() {
+  try {
+    const feed = await parser.parseURL("https://medium.com/feed/@aatifkhanjodhpur");
+    if (!feed || !feed.items || feed.items.length === 0) {
+      console.log("No feed items found or empty from Medium RSS.");
+      return BLOG_POSTS;
+    }
+
+    const mappedPosts = feed.items.map((item, index) => {
+      const rawContent = item['content:encoded'] || item.content || "";
+      
+      let excerpt = item.contentSnippet || "";
+      if (!excerpt && rawContent) {
+        excerpt = rawContent.replace(/<[^>]*>/g, '').substring(0, 150) + "...";
+      }
+      if (excerpt.length > 150) {
+        excerpt = excerpt.substring(0, 150) + "...";
+      }
+
+      // Format simple markup/paragraphs
+      let formattedContent = rawContent
+        .replace(/<h3>/g, '## ')
+        .replace(/<\/h3>/g, '\n\n')
+        .replace(/<h4>/g, '### ')
+        .replace(/<\/h4>/g, '\n\n')
+        .replace(/<p>/g, '')
+        .replace(/<\/p>/g, '\n\n')
+        .replace(/<li>/g, '- ')
+        .replace(/<\/li>/g, '\n')
+        .replace(/<ul>/g, '')
+        .replace(/<\/ul>/g, '\n\n')
+        .replace(/<pre>/g, '```ts\n')
+        .replace(/<\/pre>/g, '\n```\n\n')
+        .replace(/<[^>]*>/g, ''); 
+
+      const tags = (item.categories || []).map(t => typeof t === 'string' ? t : (t as any)._ || "");
+      const finalTags = tags.length > 0 ? tags.slice(0, 4) : ["Medium", "Software Engineering"];
+      
+      const category: 'Research' | 'Tutorial' | 'Engineering' | 'Career' = 
+        finalTags.some(t => t.toLowerCase().includes('research') || t.toLowerCase().includes('ai')) ? 'Research' :
+        finalTags.some(t => t.toLowerCase().includes('tutorial') || t.toLowerCase().includes('how')) ? 'Tutorial' :
+        finalTags.some(t => t.toLowerCase().includes('career') || t.toLowerCase().includes('interview')) ? 'Career' : 'Engineering';
+
+      let displayDate = "";
+      try {
+        if (item.pubDate) {
+          const dateObj = new Date(item.pubDate);
+          displayDate = dateObj.toISOString().split('T')[0];
+        }
+      } catch (err) {
+        displayDate = new Date().toISOString().split('T')[0];
+      }
+
+      const wordCount = rawContent.split(/\s+/).length || 300;
+      const readTimeMinutes = Math.max(1, Math.ceil(wordCount / 200));
+
+      return {
+        id: `medium-${index}`,
+        title: item.title || "Untitled Article",
+        excerpt: excerpt,
+        content: formattedContent || "Read the full article directly on Medium.",
+        date: displayDate || "2026-06-15",
+        readTime: `${readTimeMinutes} min read`,
+        tags: finalTags,
+        category: category,
+        likes: Math.floor(Math.random() * 20) + 15, // Base dynamic likes
+        url: item.link
+      };
+    });
+
+    return mappedPosts;
+  } catch (error) {
+    console.error("Failed to parse Medium RSS feed, using offline architecture logs:", error);
+    return BLOG_POSTS;
+  }
+}
+
+async function getBlogPosts() {
+  const now = Date.now();
+  if (cachedBlogPosts.length > 0 && (now - lastFetchedTime) < CACHE_TTL) {
+    return cachedBlogPosts;
+  }
+
+  const posts = await getMediumPosts();
+  if (cachedBlogPosts.length > 0) {
+    posts.forEach(newPost => {
+      const match = cachedBlogPosts.find(p => p.url === newPost.url || p.title === newPost.title);
+      if (match) {
+        newPost.likes = match.likes;
+        newPost.id = match.id;
+      }
+    });
+  }
+  cachedBlogPosts = posts;
+  lastFetchedTime = now;
+  return cachedBlogPosts;
+}
+
+app.get("/api/blog", async (req, res) => {
+  try {
+    const list = await getBlogPosts();
+    res.json(list);
+  } catch (err) {
+    res.json(BLOG_POSTS);
+  }
 });
 
 // Increment post likes
-app.post("/api/blog/:id/like", (req, res) => {
-  const post = BLOG_POSTS.find(p => p.id === req.params.id);
-  if (post) {
-    post.likes += 1;
-    res.json({ success: true, likes: post.likes });
-  } else {
-    res.status(404).json({ error: "Post not found" });
+app.post("/api/blog/:id/like", async (req, res) => {
+  try {
+    const list = await getBlogPosts();
+    const post = list.find(p => p.id === req.params.id);
+    if (post) {
+      post.likes += 1;
+      res.json({ success: true, likes: post.likes });
+    } else {
+      res.status(404).json({ error: "Post not found" });
+    }
+  } catch (err) {
+    res.status(500).json({ error: "Could not apply interaction status" });
   }
 });
 

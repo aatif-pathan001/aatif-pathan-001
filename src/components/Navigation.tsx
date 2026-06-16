@@ -1,5 +1,5 @@
 import React from 'react';
-import { Home, User, Briefcase, Layers } from 'lucide-react';
+import { Home, User, Briefcase, Layers, BookOpen, Mail } from 'lucide-react';
 
 interface NavigationProps {
   activeSection: string;
@@ -13,6 +13,8 @@ export default function Navigation({ activeSection, setActiveSection }: Navigati
     { id: 'about', label: 'About', icon: User },
     { id: 'expertise', label: 'Experience', icon: Briefcase },
     { id: 'projects', label: 'Work', icon: Layers },
+    { id: 'blog', label: 'Writing', icon: BookOpen },
+    { id: 'contact', label: 'Contact', icon: Mail },
   ];
 
   return (
