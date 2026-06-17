@@ -98,6 +98,20 @@ const PROJECTS = [
     icon: "Video",
     featured: true,
     highlightedMetric: "One-shot verification results in under 60s."
+  },
+  {
+    id: "proj-pixelcrypt",
+    title: "PixelCrypt",
+    description: "Advanced steganography tool designed to encode and conceal arbitrary files within carrier images without visual distortion. Utilizes direct pixel manipulations and custom encoding matrices.",
+    longDescription: "PixelCrypt (encode_file_into_image) is an advanced security and steganography utility designed to embed, secure, and encapsulate arbitrary file payloads directly within standard image formats.\n\nBy leveraging localized pixel modifications (such as LSB bit-mapping and custom channel matrices), the information is integrated into the native red, green, and blue color bytes in a way that remains visually imperceptible and secure against structural distortions.\n\n### Core Methodology:\n• Steganographic Encoding: Directly wraps binary streams (ZIPs, documents, executables) into PNG carrier files.\n• Chromatic Resilience: Encodes metadata across optimal color channels to block visual tearing or heavy pixel variation.\n• Browser-Safe Canvas Flow: Manipulates the carrier on the DOM canvas safely for swift local execution without remote server latency.\n• Cryptographic Boundaries: Secures embedded files through optionally layered custom passcodes to prevent unauthorized decryption.\n\n### GitHub Repository:\n• Repository: [encode_file_into_image](https://github.com/aatif-pathan001/encode_file_into_image)\n• Deployment: https://pixelcrypt-9rog.onrender.com",
+    tags: ["TypeScript", "Canvas API", "Steganography", "Cryptography", "Tailwind CSS"],
+    category: "Computer Vision",
+    githubUrl: "https://github.com/aatif-pathan001/encode_file_into_image",
+    liveUrl: "https://pixelcrypt-9rog.onrender.com",
+    demoType: "none",
+    icon: "FileSymlink",
+    featured: true,
+    highlightedMetric: "Zero visual degradation at 100% data capacity."
   }
 ];
 

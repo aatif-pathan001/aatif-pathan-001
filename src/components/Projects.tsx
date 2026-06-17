@@ -139,6 +139,17 @@ export default function Projects({}: ProjectsProps) {
                         <span>Source</span>
                       </a>
                     )}
+                    {project.liveUrl && project.liveUrl !== "#" && (
+                      <a
+                        href={project.liveUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="text-zinc-400 hover:text-white transition-colors flex items-center space-x-1.5 text-xs font-mono"
+                      >
+                        <ExternalLink className="w-3.5 h-3.5" />
+                        <span>Live Demo</span>
+                      </a>
+                    )}
                     <button
                       onClick={() => setSelectedProject(project)}
                       className="text-zinc-400 hover:text-white transition-colors flex items-center space-x-1.5 text-xs font-mono cursor-pointer"
@@ -177,7 +188,7 @@ export default function Projects({}: ProjectsProps) {
               <div className="p-6 space-y-4 max-h-[60vh] overflow-y-auto scrollbar">
                 <div>
                   <h4 className="text-xs font-mono tracking-wider text-zinc-400 uppercase mb-1">Architectural Overview</h4>
-                  <p className="text-sm text-zinc-300 leading-relaxed font-light">
+                  <p className="text-sm text-zinc-300 leading-relaxed font-light whitespace-pre-wrap">
                     {selectedProject.longDescription || selectedProject.description}
                   </p>
                 </div>
@@ -213,6 +224,17 @@ export default function Projects({}: ProjectsProps) {
                     >
                       <Github className="w-3.5 h-3.5" />
                       <span>Code Repo</span>
+                    </a>
+                  )}
+                  {selectedProject.liveUrl && selectedProject.liveUrl !== "#" && (
+                    <a
+                      href={selectedProject.liveUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="bg-violet-600 hover:bg-violet-500 text-white px-3.5 py-1.5 rounded text-xs font-mono flex items-center space-x-1.5 transition-colors"
+                    >
+                      <ExternalLink className="w-3.5 h-3.5" />
+                      <span>Live Site</span>
                     </a>
                   )}
                 </div>
