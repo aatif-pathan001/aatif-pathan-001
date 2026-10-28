@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="_ds/nocturne-0353f0ee-8691-4a95-bb85-83fa19c8426e/styles.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap">
+  <script src="_ds/nocturne-0353f0ee-8691-4a95-bb85-83fa19c8426e/_ds_bundle.js"></script>
+  <script>window.OM_SCENES = '[{"name":"Upload","dur":4.5,"desc":"A PDF is dragged into ingest_file(), uploads and gets a doc_id"},{"name":"Parse","dur":6,"desc":"A scan beam reads the raw page while each line is typed out as Markdown"},{"name":"Split","dur":6,"desc":"The header splitter cuts the Markdown into chunk cards with ids and metadata, then scrolls the list"},{"name":"Embed","dur":6,"desc":"Chunk text is tokenized, passes through the model and becomes 384-d vectors"},{"name":"Store","dur":6,"desc":"Vectors fly into Chroma as a rotating 3D point cloud; nearest neighbours light up"},{"name":"Index","dur":6.5,"desc":"Terms are tokenized, stopwords dropped, and written into the BM25 inverted index"},{"name":"Ready","dur":5,"desc":"Camera pulls back to the whole pipeline with the final summary"}]';</script>
+  <script>window.OM_PLAYBACK = '{"mode":"loop"}';</script>
+  <script>window.TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{"motionEditor":false,"showHud":true,"showGrid":true}/*EDITMODE-END*/;</script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600&display=swap">
+  <style>html,body{margin:0;height:100%;background:#141327;overflow:hidden}a{color:var(--color-accent)}a:hover{color:var(--color-accent-300)}
+:root{--color-bg:#141327;--color-surface:#1c1b33;--color-text:#f2f1fa;--color-accent:#8b5cf6;--color-divider:color-mix(in srgb,#f2f1fa 10%,transparent);
+--color-neutral-100:#f2f1fa;--color-neutral-200:#d6d4e8;--color-neutral-300:#b8b6d0;--color-neutral-400:#8f8daa;--color-neutral-500:#7d7b98;--color-neutral-600:#5f5d7a;--color-neutral-700:#3a3958;--color-neutral-800:#2c2b48;--color-neutral-900:#1f1e38;
+--color-accent-100:#ede9fe;--color-accent-200:#ddd6fe;--color-accent-300:#c4b5fd;--color-accent-400:#a78bfa;--color-accent-500:#8b5cf6;--color-accent-600:#7c3aed;--color-accent-700:#5b4aa8;--color-accent-800:#3b2f78;--color-accent-900:#2a2550;
+--font-heading:Outfit,system-ui,sans-serif;--font-body:Outfit,system-ui,sans-serif}
+body{font-family:Outfit,system-ui,sans-serif}
+[data-omelette-chrome]{display:none!important}
+div:has(> div > svg[data-om-exportable-video-with-duration-secs]){background:#141327!important}
+svg[data-om-exportable-video-with-duration-secs]{box-shadow:none!important}</style>
+</helmet>
+<div style="position:fixed;inset:0;background:var(--color-bg)">
+  <x-import component-from-global-scope="RagApp" from="./animations-v3.jsx ./tweaks-panel.jsx ./rag-pipeline.jsx" style="position:absolute;inset:0" hint-size="100%,100%"></x-import>
+</div>
+</x-dc>
+</body>
+</html>

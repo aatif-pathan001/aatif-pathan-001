@@ -4,9 +4,16 @@ export interface Project {
   description: string;
   longDescription?: string;
   tags: string[];
-  category: 'LLM Agents' | 'Computer Vision' | 'Mlopps / Infrastructure' | 'Voice AI';
+  category: 'LLM Agents' | 'Computer Vision' | 'RAG Systems' | 'Mlopps / Infrastructure' | 'Voice AI';
+  key?: 'llm' | 'cv' | 'rag';
+  cat?: string;
+  file?: string;
+  stat?: string;
+  statLabel?: string;
+  anim?: string;
   githubUrl?: string;
   liveUrl?: string;
+  demo?: boolean;
   demoType: 'text-agent' | 'prompt-compiler' | 'data-analyst' | 'none';
   icon: string; // Lucide icon name
   featured: boolean;
