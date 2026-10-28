@@ -139,7 +139,7 @@ const PROJECTS = [
     tags: ["Python", "Hybrid Search", "Cross-Encoder", "Vector DB", "RAGAS"],
     category: "RAG Systems",
     githubUrl: "https://github.com/aatif-pathan001",
-    liveUrl: "#",
+    liveUrl: "https://rag-detective.onrender.com",
     demo: true,
     demoType: "none",
     icon: "Search",
@@ -558,7 +558,6 @@ When deployed with a live API Key in AI Studio, this playground communicates ser
 // Express static server integration for production and Vite middleware for dev
 const setupServer = async () => {
   app.use("/new_portfolio", express.static(path.join(process.cwd(), "public", "new_portfolio")));
-  app.use("/new_portfolio", express.static(path.join(process.cwd(), "new_portfolio")));
   if (process.env.NODE_ENV !== "production") {
     console.log("Configuring dev mode with Vite server middleware...");
     const vite = await createViteServer({

@@ -12,9 +12,7 @@ export default defineConfig(() => {
         configureServer(server) {
           server.middlewares.use('/new_portfolio', (req, res, next) => {
             const reqPath = decodeURIComponent((req.url || '/').split('?')[0]);
-            const pubFilePath = path.join(__dirname, 'public', 'new_portfolio', reqPath);
-            const rootFilePath = path.join(__dirname, 'new_portfolio', reqPath);
-            const filePath = fs.existsSync(pubFilePath) ? pubFilePath : rootFilePath;
+            const filePath = path.join(__dirname, 'public', 'new_portfolio', reqPath);
             if (fs.existsSync(filePath) && fs.statSync(filePath).isFile()) {
               const ext = path.extname(filePath).toLowerCase();
               const mimeMap: Record<string, string> = {

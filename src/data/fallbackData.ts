@@ -55,7 +55,7 @@ export const FALLBACK_PROJECTS: Project[] = [
     tags: ["Python", "Hybrid Search", "Cross-Encoder", "Vector DB", "RAGAS"],
     category: "RAG Systems",
     githubUrl: "https://github.com/aatif-pathan001",
-    liveUrl: "#",
+    liveUrl: "https://rag-detective.onrender.com",
     demo: true,
     demoType: "none",
     icon: "Search",

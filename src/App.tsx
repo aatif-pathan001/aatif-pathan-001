@@ -91,7 +91,7 @@ const PROJECTS = [
     tags: ['Python', 'Hybrid Search', 'Cross-Encoder', 'Vector DB', 'RAGAS'],
     demo: true,
     githubUrl: 'https://github.com/aatif-pathan001',
-    liveUrl: '/new_portfolio/RAG Detective v3.dc.html',
+    liveUrl: 'https://rag-detective.onrender.com',
   },
 ];
 
@@ -411,170 +411,13 @@ class PortfolioComponent extends React.Component<{}, AppState> {
       ctx.textAlign = 'left';
     };
 
-    const drawRAG = (c: HTMLCanvasElement, t: number) => {
-      const p = prep(c);
-      if (!p) return;
-      const { ctx, W, H } = p,
-        ph = (t % 8) / 8,
-        cl = (v: number) => Math.max(0, Math.min(1, v));
-      ctx.fillStyle = '#141327';
-      ctx.fillRect(0, 0, W, H);
-      const x0 = 18,
-        w = W - 36,
-        rr = (x: number, y: number, ww: number, hh: number, r: number) => {
-          ctx.beginPath();
-          ctx.roundRect(x, y, ww, hh, r);
-        };
-      const q = 'How does RAG reduce hallucinations?',
-        qn = Math.floor(cl(ph / 0.12) * q.length);
-      ctx.fillStyle = '#1b1a33';
-      rr(x0, 16, w, 30, 6);
-      ctx.fill();
-      ctx.strokeStyle = '#34305a';
-      ctx.lineWidth = 1;
-      ctx.stroke();
-      ctx.font = mono(11);
-      ctx.fillStyle = '#a78bfa';
-      ctx.fillText('>', x0 + 12, 35);
-      ctx.fillStyle = '#d6d4e8';
-      ctx.fillText(q.slice(0, qn) + (ph < 0.14 && Math.floor(t * 3) % 2 ? '▍' : ''), x0 + 28, 35);
-      const S = ['query', 'retrieve', 'rerank', 'generate', 'verify'],
-        ny = 46 + H * 0.15,
-        prog = cl((ph - 0.12) / 0.6) * 4,
-        nx = (i: number) => x0 + 14 + ((w - 28) * i) / 4,
-        live = ph > 0.12;
-      ctx.strokeStyle = '#2c2b48';
-      ctx.lineWidth = 2;
-      ctx.beginPath();
-      ctx.moveTo(nx(0), ny);
-      ctx.lineTo(nx(4), ny);
-      ctx.stroke();
-      if (live) {
-        ctx.strokeStyle = '#a78bfa';
-        ctx.shadowColor = '#8b5cf6';
-        ctx.shadowBlur = 8;
-        ctx.beginPath();
-        ctx.moveTo(nx(0), ny);
-        ctx.lineTo(nx(prog), ny);
-        ctx.stroke();
-        ctx.shadowBlur = 0;
-      }
-      ctx.font = mono(9.5);
-      ctx.textAlign = 'center';
-      S.forEach((s, i) => {
-        const on = live && prog >= i - 0.001;
-        ctx.fillStyle = on ? '#7c3aed' : '#24233e';
-        ctx.beginPath();
-        ctx.arc(nx(i), ny, 6, 0, 7);
-        ctx.fill();
-        ctx.strokeStyle = on ? '#c4b5fd' : '#3a3958';
-        ctx.lineWidth = 1;
-        ctx.stroke();
-        ctx.fillStyle = on ? '#c4b5fd' : '#5f5d7a';
-        ctx.fillText(s, nx(i), ny + 22);
-      });
-      ctx.textAlign = 'left';
-      if (live && prog < 4) {
-        ctx.fillStyle = '#fff';
-        ctx.shadowColor = '#c4b5fd';
-        ctx.shadowBlur = 12;
-        ctx.beginPath();
-        ctx.arc(nx(prog), ny, 3.5, 0, 7);
-        ctx.fill();
-        ctx.shadowBlur = 0;
-      }
-      const ey = ny + H * 0.15,
-        ew = w * 0.5,
-        rh = 18,
-        gap = H * 0.078;
-      ctx.font = mono(10);
-      ctx.fillStyle = '#8f8daa';
-      ctx.fillText('evidence · top-3', x0, ey);
-      (
-        [
-          ['Lewis et al. 2020', 0.92],
-          ['Gao et al. 2023', 0.87],
-          ['Production RAG guide', 0.78],
-        ] as [string, number][]
-      ).forEach(([l, s], i) => {
-        const y = ey + 12 + i * gap,
-          k = cl(prog - 1 - i * 0.3);
-        ctx.fillStyle = '#24233e';
-        rr(x0, y, ew, rh, 3);
-        ctx.fill();
-        if (k) {
-          ctx.fillStyle = 'rgba(139,92,246,' + (0.3 + 0.45 * k) + ')';
-          rr(x0, y, ew * s * k, rh, 3);
-          ctx.fill();
-        }
-        ctx.fillStyle = k ? '#e4dcff' : '#5f5d7a';
-        ctx.fillText('[' + (i + 1) + '] ' + l, x0 + 7, y + 12.5);
-        ctx.textAlign = 'right';
-        ctx.fillText(k ? (s * k).toFixed(2) : '—', x0 + ew - 7, y + 12.5);
-        ctx.textAlign = 'left';
-      });
-      const ax = x0 + ew + 18,
-        aw = w - ew - 18,
-        g = cl((ph - 0.5) / 0.3),
-        LW = [1, 0.84, 0.93, 0.7, 0.5],
-        tot = LW.reduce((a, b) => a + b, 0);
-      ctx.fillStyle = '#8f8daa';
-      ctx.fillText('answer · cited', ax, ey);
-      let left = g * tot;
-      LW.forEach((lw, i) => {
-        const y = ey + 14 + i * 15,
-          f = Math.max(0, Math.min(lw, left));
-        left -= lw;
-        ctx.fillStyle = '#24233e';
-        rr(ax, y, aw * lw, 6, 3);
-        ctx.fill();
-        if (f) {
-          ctx.fillStyle = 'rgba(214,212,232,.75)';
-          rr(ax, y, aw * f, 6, 3);
-          ctx.fill();
-        }
-        if ((i === 1 || i === 3) && f >= lw) {
-          ctx.fillStyle = '#7c3aed';
-          rr(ax + aw * lw + 4, y - 3, 16, 12, 3);
-          ctx.fill();
-          ctx.fillStyle = '#fff';
-          ctx.font = mono(8);
-          ctx.fillText(i === 1 ? '1' : '2', ax + aw * lw + 9, y + 6);
-          ctx.font = mono(10);
-        }
-      });
-      const vy = H - 40,
-        ok = ph > 0.86,
-        facts = Math.min(5, Math.floor(cl((ph - 0.7) / 0.16) * 5));
-      ctx.fillStyle = '#24233e';
-      rr(x0, vy, w, 4, 2);
-      ctx.fill();
-      const pg = ctx.createLinearGradient(x0, 0, x0 + w, 0);
-      pg.addColorStop(0, '#7c2df0');
-      pg.addColorStop(1, '#a78bfa');
-      ctx.fillStyle = pg;
-      rr(x0, vy, Math.max(4, w * cl(ph / 0.86)), 4, 2);
-      ctx.fill();
-      ctx.font = mono(10);
-      ctx.fillStyle = ok ? '#4ade80' : '#c9c7de';
-      ctx.fillText(ok ? 'faithfulness 0.94 · 0 unsupported' : 'grounding claims…', x0, vy + 24);
-      ctx.font = mono(11);
-      const vt = ok ? 'VERIFIED · 5/5' : 'checking ' + facts + '/5',
-        tw = ctx.measureText(vt).width + 18;
-      ctx.fillStyle = ok ? '#7c3aed' : '#24233e';
-      rr(x0 + w - tw, vy + 11, tw, 20, 4);
-      ctx.fill();
-      ctx.fillStyle = '#fff';
-      ctx.fillText(vt, x0 + w - tw + 9, vy + 25);
-    };
-
     const loop = (now: number) => {
       const dt = Math.min(0.05, (now - last) / 1000);
       last = now;
-      (['llm', 'cv', 'rag'] as const).forEach((k) => {
+      (['llm', 'cv'] as const).forEach((k) => {
         st[k] += dt * (this.hov[k] ? 2.4 : 1);
         const c = this.canv[k];
-        if (c && c.isConnected) ({ llm: drawLLM, cv: drawCV, rag: drawRAG })[k](c, st[k]);
+        if (c && c.isConnected) ({ llm: drawLLM, cv: drawCV })[k](c, st[k]);
       });
       this.demoRaf = requestAnimationFrame(loop);
     };
